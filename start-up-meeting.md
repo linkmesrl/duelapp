@@ -3,7 +3,9 @@
 -----
 **POC**
 
-- Creare match
+Lista delle pagine
+
+- Creazione match
 - Lista match in corso
 - Lista match conclusi
 - Singolo match in corso
@@ -24,5 +26,5 @@ Statistiche del match concluso
 ## Finito il match
 Ci sarà la classifica totale delle morti, delle giocate etc
 
-## Skin
+## Skin / Design
 Creazione di skin personalizzate, country, fantasy, fiorellini, porno.
