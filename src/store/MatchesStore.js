@@ -1,0 +1,28 @@
+import { observable, action } from 'mobx';
+import FirebaseAPI from '../util/FirebaseAPI';
+
+class MatchesStore {
+  @observable isLoading = false;
+  @observable matchesPushed;
+  @observable matchesList = [];
+
+  @action pushMatches() {
+    this.isLoading = true;
+
+    FirebaseAPI.pushMatches()
+      .then(() => {
+        this.isLoading = false;
+        this.matchesPushed = true;
+      })
+      .catch((err) => {
+        console.log('Error pushing matches: ', err);
+        this.isLoading = false;
+      });
+  }
+
+  @action getMatchesList() {
+    // get matches
+  }
+}
+
+export default new MatchesStore();

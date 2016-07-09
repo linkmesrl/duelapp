@@ -11,6 +11,7 @@
     "mobx-react": "^3.4.0",
     "react": "15.2.0",
     "react-native": "0.29.0",
+    "react-native-gifted-listview": "0.0.15",
     "react-native-mobx": "^0.1.1",
     "react-native-router-flux": "3.30.9"
   },

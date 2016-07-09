@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import { StyleSheet, Text, View } from 'react-native';
 import { observer } from 'mobx-react/native';
 
 const styles = StyleSheet.create({
@@ -23,28 +22,22 @@ const styles = StyleSheet.create({
 });
 
 @observer
-class Home extends Component {
+class Matches extends Component {
   componentDidMount() {
-    this.props.store.pushMatches();
+    this.props.store.getMatchesList();
   }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Welcome to DuelApp!</Text>
-        {this.props.store.matchesPushed ?
-          <TouchableOpacity onPress={() => Actions.matches()}>
-            <Text>Go to matches</Text>
-          </TouchableOpacity>
-        :
-          <Text>Loading...</Text>
-        }
+        <Text>Matches</Text>
       </View>
     );
   }
 }
 
-Home.propTypes = {
+Matches.propTypes = {
   store: PropTypes.object.isRequired,
 };
 
-export default Home;
+export default Matches;

@@ -2,14 +2,13 @@ import React from 'react';
 import { Actions, Router, Scene } from 'react-native-mobx';
 
 import Home from './views/Home/Home';
-import Other from './views/Other/Other';
-
-import HomeStore from './store/HomeStore';
+import Matches from './views/Matches/Matches';
+import MatchesStore from './store/MatchesStore';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="home" component={Home} title="Home" store={HomeStore} initial />
-    <Scene key="other" component={Other} title="Other" />
+    <Scene key="home" component={Home} title="Home" store={MatchesStore} initial />
+    <Scene key="matches" component={Matches} title="Matches" store={MatchesStore} />
   </Scene>
 );
 
