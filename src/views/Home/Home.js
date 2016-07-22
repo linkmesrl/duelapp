@@ -20,26 +20,39 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
+  matchButton: {
+    fontSize: 20,
+    marginTop: 10,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
 });
 
 @observer
 class Home extends Component {
   componentDidMount() {
-    this.props.store.pushMatches();
+    // this.props.store.pushMatches();
   }
+
+  goToSingleMatch() {
+    Actions.match();
+  }
+
+  goToMatches() {
+    Actions.matches();
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome to DuelApp!</Text>
-        <TouchableOpacity onPress={() => Actions.login()}>
-          <Text>Login</Text>
+        <TouchableOpacity onPress={this.goToSingleMatch}>
+          <Text style={styles.matchButton}>Go to single match</Text>
         </TouchableOpacity>
-        {this.props.store.matchesPushed ?
-          <TouchableOpacity onPress={() => Actions.matches()}>
+        {this.props.store.matchesPushed &&
+          <TouchableOpacity onPress={this.goToMatches}>
             <Text>Go to matches</Text>
           </TouchableOpacity>
-        :
-          <Text>Loading...</Text>
         }
       </View>
     );
