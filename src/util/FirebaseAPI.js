@@ -26,4 +26,15 @@ export default FirebaseAPI = {
   getMatches() {
     return firebase.database().ref('matches').on('child_added', (data) => data.val());
   },
+
+  login(username, password) {
+    return firebase.auth().signInWithEmailAndPassword(username, password);
+  },
+
+  getUsers() {
+    firebase.database().ref('/users/P2IJNrzKztdhx3ScnQkV6OZQSUr2').once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+    });
+  }
+
 };
