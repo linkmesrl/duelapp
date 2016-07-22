@@ -17,16 +17,16 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   button: {
     backgroundColor: '#000',
     flex: 1,
-    padding: 5
+    padding: 5,
   },
   buttonWrapper: {
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 });
 
 
@@ -35,7 +35,7 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { username:'gianfranco@linkme.it', password:'gianfranco123'};
+    this.state = { username: 'gianfranco@linkme.it', password: 'gianfranco123' };
   }
 
   handleUsername = (username) => this.setState({ username });
@@ -51,28 +51,29 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         <Text>Login</Text>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={this.handleUsername}
-            value={this.state.username}
-          />
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            onChangeText={this.handlePassword}
-            value={this.state.password}
-          />
-          <View style={styles.buttonWrapper}>
-            <TouchableHighlight
-              onPress={this.login}
-              style={styles.button}
-            >
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableHighlight>
-          </View>
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={this.handleUsername}
+          value={this.state.username}
+        />
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={this.handlePassword}
+          value={this.state.password}
+        />
+        <View style={styles.buttonWrapper}>
+          <TouchableHighlight
+            onPress={this.login}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableHighlight>
+        </View>
       </View>
     );
   }
 }
-
-
+Login.propTypes = {
+  store: PropTypes.object.isRequired,
+};
 export default Login;
