@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 @observer
 class Home extends Component {
   componentDidMount() {
-    // this.props.store.pushMatches();
+    this.props.store.getUser();
   }
 
   goToSingleMatch() {
@@ -45,7 +45,7 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Welcome to DuelApp!</Text>
+        <Text style={styles.heading}>Welcome {this.props.store.user.email}!</Text>
         <TouchableOpacity onPress={this.goToSingleMatch}>
           <Text style={styles.matchButton}>Go to single match</Text>
         </TouchableOpacity>

@@ -31,10 +31,17 @@ export default FirebaseAPI = {
     return firebase.auth().signInWithEmailAndPassword(username, password);
   },
 
+  getCurrentUser() {
+    const user = firebase.auth().currentUser;
+    console.log(user);
+    return user;
+  },
+
   getUsers() {
-    firebase.database().ref('/users/P2IJNrzKztdhx3ScnQkV6OZQSUr2').once('value').then(function(snapshot) {
-      console.log(snapshot.val());
-    });
-  }
+    return firebase.database().ref('/users/P2IJNrzKztdhx3ScnQkV6OZQSUr2').once('value')
+      .then((snapshot) => {
+        console.log(snapshot.val());
+      });
+  },
 
 };

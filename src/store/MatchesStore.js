@@ -5,7 +5,11 @@ class MatchesStore {
   @observable isLoading = false;
   @observable matchesPushed;
   @observable matchesList = [];
+  @observable user = {};
 
+  @action getUser() {
+    this.user = FirebaseAPI.getCurrentUser();
+  }
   @action pushMatches() {
     this.isLoading = true;
 
