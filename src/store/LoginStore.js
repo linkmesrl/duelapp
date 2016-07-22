@@ -6,11 +6,13 @@ class LoginStore {
 
   @action login(user, password) {
     console.log('LOGIN');
-    // this.isLoading = true;
+    @observable logged = false;
+
 
     FirebaseAPI.login(user, password)
     .then(() => {
       console.log('LOGIN FUNZA');
+      this.logged = true;
     })
     .catch(function(error) {
       // Handle Errors here.

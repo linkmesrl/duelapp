@@ -12,8 +12,8 @@ import LoginStore from './store/LoginStore';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="login" component={Login} title="Login" store={LoginStore} />
-    <Scene key="home" component={Home} title="Home" store={MatchesStore} initial />
+    <Scene key="login" component={Login} title="Login" store={LoginStore} initial />
+    <Scene key="home" component={Home} title="Home" store={MatchesStore} />
     <Scene key="match" component={Match} store={MatchStore} hideNavBar />
     <Scene key="matches" component={Matches} title="Matches" store={MatchesStore} />
   </Scene>
