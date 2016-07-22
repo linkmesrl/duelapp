@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
+import { Actions } from 'react-native-router-flux';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,9 +38,11 @@ class Login extends Component {
     super(props);
     this.state = { username: 'gianfranco@linkme.it', password: 'gianfranco123' };
   }
-  componentWillReceiveUpdate(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.store.logged) {
-      Actions.home();
+      Actions.home({
+        type: 'replace',
+      });
     }
   }
   handleUsername = (username) => this.setState({ username });
@@ -52,6 +55,7 @@ class Login extends Component {
   }
 
   render() {
+    console.log(this.props.store.logged);
     return (
       <View style={styles.container}>
         <Text>Login</Text>
