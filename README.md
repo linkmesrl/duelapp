@@ -1,6 +1,7 @@
 # duelapp
 React native game duelapp
 
+## Start the project
 ```
 npm i
 react-native run-ios
