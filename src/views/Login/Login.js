@@ -37,7 +37,11 @@ class Login extends Component {
     super(props);
     this.state = { username: 'gianfranco@linkme.it', password: 'gianfranco123' };
   }
-
+  componentWillReceiveUpdate(nextProps) {
+    if (nextProps.store.logged) {
+      Actions.home();
+    }
+  }
   handleUsername = (username) => this.setState({ username });
 
   handlePassword = (password) => this.setState({ password });
