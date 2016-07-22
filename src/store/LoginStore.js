@@ -3,14 +3,11 @@ import FirebaseAPI from '../util/FirebaseAPI';
 
 class LoginStore {
 
-
+  @observable logged = false;
   @action login(user, password) {
-    console.log('LOGIN');
-    // this.isLoading = true;
-
     FirebaseAPI.login(user, password)
     .then(() => {
-      console.log('LOGIN FUNZA');
+      this.logged = true;
     })
     .catch((error) => {
       // Handle Errors here.
