@@ -31,6 +31,9 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome to DuelApp!</Text>
+        <TouchableOpacity onPress={() => Actions.login()}>
+          <Text>Login</Text>
+        </TouchableOpacity>
         {this.props.store.matchesPushed ?
           <TouchableOpacity onPress={() => Actions.matches()}>
             <Text>Go to matches</Text>
