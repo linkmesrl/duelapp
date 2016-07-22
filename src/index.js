@@ -10,9 +10,26 @@ import MatchesStore from './store/MatchesStore';
 
 const scenes = Actions.create(
   <Scene key="root">
-    <Scene key="home" component={Home} title="Home" store={MatchesStore} initial />
-    <Scene key="match" component={Match} store={MatchStore} hideNavBar />
-    <Scene key="matches" component={Matches} title="Matches" store={MatchesStore} />
+    <Scene
+      key="home"
+      component={Home}
+      title="Home"
+      store={MatchesStore}
+      initial
+      hideNavBar={false}
+    />
+    <Scene
+      key="match"
+      component={Match}
+      store={MatchStore}
+      hideNavBar
+    />
+    <Scene
+      key="matches"
+      component={Matches}
+      title="Matches"
+      store={MatchesStore}
+    />
   </Scene>
 );
 

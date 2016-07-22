@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
 import { observer } from 'mobx-react/native';
 import Swiper from 'react-native-swiper';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +38,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
   },
+  exitButton: {
+    position: 'absolute',
+    top: 30,
+    right: 30,
+    backgroundColor: 'transparent',
+  },
 });
 
 @observer
@@ -44,6 +52,12 @@ class Match extends Component {
     if (state.index !== this.props.store.currentIndex) {
       this.props.store.setCurrentIndex(state.index);
     }
+  }
+
+  goHome = () => {
+    Actions.home({
+      type: 'back',
+    });
   }
 
   render() {
@@ -65,6 +79,9 @@ class Match extends Component {
             <Text style={styles.text}>And simple</Text>
           </View>
         </Swiper>
+        <TouchableOpacity style={styles.exitButton} onPress={this.goHome}>
+          <Icon name="remove" size={30} color="#fff" />
+        </TouchableOpacity>
       </View>
     );
   }
