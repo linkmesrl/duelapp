@@ -1,7 +1,7 @@
 #Duelapp
 
-DuelApp is a casual Game, created for the entertainment of a friend’s group. When a match starts, few interactions are needed to play the game: the game is designed to be addictive with a very low level of time consumption.  
-DualApp is react native game duelapp
+Duelapp is a casual Game, created for the entertainment of a friend’s group. When a match starts, few interactions are needed to play the game: the game is designed to be addictive with a very low level of time consumption.  
+Duelapp is a react native app
 
 
 ## Start the project
