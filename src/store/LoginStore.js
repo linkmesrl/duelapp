@@ -5,16 +5,16 @@ class LoginStore {
 
   @observable logged = false;
   @action login(user, password) {
-    FirebaseAPI.login(user, password)
-    .then(() => {
-      this.logged = true;
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      // const errorCode = error.code;
-      // const errorMessage = error.message;
-      console.log(error);
-    });
+    return Promise.resolve(FirebaseAPI.login(user, password));
+    // .then(() => {
+    //   this.logged = true;
+    // })
+    // .catch((error) => {
+    //   // Handle Errors here.
+    //   // const errorCode = error.code;
+    //   // const errorMessage = error.message;
+    //   console.log(error);
+    // });
   }
 }
 

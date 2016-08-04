@@ -38,20 +38,29 @@ class Login extends Component {
     super(props);
     this.state = { username: 'gianfranco@linkme.it', password: 'gianfranco123' };
   }
-  componentDidUpdate(nextProps) {
-    if (nextProps.store.logged) {
-      Actions.home({
-        type: 'replace',
-      });
-    }
-  }
+  // componentDidUpdate(nextProps) {
+  //   if (nextProps.store.logged) {
+  //     Actions.home({
+  //       type: 'replace',
+  //     });
+  //   }
+  // }
   handleUsername = (username) => this.setState({ username });
-
   handlePassword = (password) => this.setState({ password });
 
   login = () => {
     const { username, password } = this.state;
-    this.props.store.login(username, password);
+    this.props.store.login(username, password)
+    .then((user) => {
+      console.log(user);
+      this.props.store.logged = true;
+      Actions.home({
+        type: 'replace',
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   render() {
