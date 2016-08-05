@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { Dimensions, StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
+import { Actions } from 'react-native-router-flux';
 
 import GiftedListView from 'react-native-gifted-listview';
-
+const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -23,23 +24,39 @@ const styles = StyleSheet.create({
   },
 });
 
+const customStyles = {
+  separator: {
+    height: 1,
+    backgroundColor: '#CCC',
+  },
+  paginationView: {
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+  },
+  row: {
+    width,
+    padding: 10,
+    height: 44,
+  },
+};
+
 @observer
 class Matches extends Component {
   componentDidMount() {
     this.props.store.getMatchesList();
-    // this.setState({
-    //   dataSource: this.state.dataSource.cloneWithRows(this.props.store.matchesList),
-    // });
   }
 
   onFetch = (page = 1, callback) => {
-    const rows = Object.keys(this.props.store.matchesList).map((item) => JSON.stringify(item));
+    const rows = Object.keys(this.props.store.matchesList)
+      .map((item) => JSON.stringify(this.props.store.matchesList[item]));
     callback(rows, { allLoaded: true });
   }
 
   onPress = (rowParsed) => {
-    Actions.seasons({
-      seasons: rowParsed.seasons,
+    Actions.match({
+      match: rowParsed,
     });
   }
 
@@ -47,20 +64,19 @@ class Matches extends Component {
     const rowParsed = JSON.parse(rowData);
     return (
       <TouchableHighlight
-        // style={customStyles.row}
+        style={customStyles.row}
         underlayColor="#c8c7cc"
         onPress={() => this.onPress(rowParsed)}
       >
-        <Text>{rowParsed}</Text>
+        <Text>{rowParsed.id}</Text>
       </TouchableHighlight>
     );
   }
 
   render() {
-    console.log('matchesList', console.log(Object.keys(this.props.store.matchesList)));
     if (this.props.store.matchesList.length === 0) {
       return (
-        <Text>Loading...</Text>
+        <Text style={styles.container}>Loading...</Text>
       );
     }
     return (
@@ -73,7 +89,7 @@ class Matches extends Component {
           pagination
           refreshable
           withSections={false}
-          // customStyles={customStyles}
+          customStyles={customStyles}
           refreshableTintColor="blue"
         />
       </View>

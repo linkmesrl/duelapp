@@ -61,6 +61,7 @@ class Match extends Component {
   }
 
   render() {
+    console.log('Match', this.props);
     return (
       <View style={styles.container}>
         <Swiper
@@ -70,7 +71,7 @@ class Match extends Component {
           onMomentumScrollEnd={this.onChange}
         >
           <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
+            <Text style={styles.text}>{this.props.match.id}</Text>
           </View>
           <View style={styles.slide2}>
             <Text style={styles.text}>Beautiful</Text>
