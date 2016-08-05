@@ -22,7 +22,6 @@ class MatchesStore {
   @action getMatchesList() {
     FirebaseAPI.getMatches()
       .then(res => {
-        console.log('getMatchesList', res.val());
         this.matchesList = res.val();
       })
       .catch((err) => {

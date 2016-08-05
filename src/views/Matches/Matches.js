@@ -74,6 +74,7 @@ class Matches extends Component {
   }
 
   render() {
+    console.log(this.props.store.matchesList);
     if (this.props.store.matchesList.length === 0) {
       return (
         <Text style={styles.container}>Loading...</Text>
