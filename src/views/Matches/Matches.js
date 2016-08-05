@@ -52,7 +52,9 @@ class Matches extends Component {
 
   onFetch = (page = 1, callback) => {
     const rows = Object.keys(this.props.store.matchesList)
-      .map((item) => JSON.stringify(this.props.store.matchesList[item]));
+      .map(key => this.props.store.matchesList[key])
+      .filter(match => match.running)
+      .map(filteredMatch => JSON.stringify(filteredMatch));
     callback(rows, { allLoaded: true });
   }
 
@@ -76,7 +78,6 @@ class Matches extends Component {
   }
 
   render() {
-    console.log(this.props.store.matchesList);
     if (this.props.store.matchesList.length === 0) {
       return (
         <Text style={styles.container}>Loading...</Text>
