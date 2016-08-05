@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  title: { paddingTop: 70 },
   text: {
     fontSize: 20,
     textAlign: 'center',
@@ -85,7 +86,7 @@ class Matches extends Component {
     }
     return (
       <View style={styles.container}>
-        <Text>Matches</Text>
+        <Text style={styles.title}>Matches running</Text>
         <GiftedListView
           rowView={this.renderRowView}
           onFetch={this.onFetch}
