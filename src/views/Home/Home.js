@@ -46,9 +46,12 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome {this.props.store.user.email}!</Text>
-        <TouchableOpacity onPress={this.goToSingleMatch}>
-          <Text style={styles.matchButton}>Go to single match</Text>
+        <TouchableOpacity onPress={this.goToMatches}>
+          <Text style={styles.matchButton}>Go to matches</Text>
         </TouchableOpacity>
+        {
+          // this.props.matchesList.map((el, i) => <Text style={styles.heading}>{el}</Text>)
+        }
         {this.props.store.matchesPushed &&
           <TouchableOpacity onPress={this.goToMatches}>
             <Text>Go to matches</Text>
