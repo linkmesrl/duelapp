@@ -11,7 +11,11 @@ react-native run-ios
 ```
 
 ## TODO
-- [ ] Retrieve users data list from Firebase or find a way to have a user list
+- [ ] Retrieve users data list from Firebase or find a way to have a user list @ilgianfra
+- [ ] Style buttons @paolorovella
+- [ ] Style titles @paolorovella
+- [ ] Style pages @paolorovella
+- [ ] Add a filter to refresh the list of matches according between running and completed
 - [x] Show matches filtered by running property
 - [x] Retrieve matches from Firebase
 - [x] Retrieve single match info

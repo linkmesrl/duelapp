@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { observer } from 'mobx-react/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,10 +22,15 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   matchButton: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 20,
+    padding: 10,
     marginTop: 10,
     marginBottom: 20,
     textAlign: 'center',
+    borderWidth: 1,
   },
 });
 
@@ -60,10 +66,13 @@ class Home extends Component {
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome {this.props.store.user.email}!</Text>
         <TouchableOpacity onPress={this.goToSingleMatch}>
-          <Text style={styles.matchButton}>Go to single match</Text>
+          <Text style={styles.matchButton}>
+            <Icon name="plus" size={20} color="#000" /> Create a new match</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={this.goToMatches}>
-          <Text style={styles.matchButton}>Go to matches</Text>
+          <Text style={styles.matchButton}>
+            Go to matches <Icon name="chevron-right" size={20} color="#000" />
+          </Text>
         </TouchableOpacity>
         {
           // this.props.matchesList.map((el, i) => <Text style={styles.heading}>{el}</Text>)

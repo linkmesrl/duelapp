@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet, Text, View, TouchableHighlight } from 'react-na
 import { observer } from 'mobx-react/native';
 import { Actions } from 'react-native-router-flux';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import GiftedListView from 'react-native-gifted-listview';
 import moment from 'moment';
 
@@ -73,7 +74,9 @@ class Matches extends Component {
         underlayColor="#c8c7cc"
         onPress={() => this.onPress(rowParsed)}
       >
-        <Text>{rowParsed.name} - {moment(rowParsed.date).fromNow()}</Text>
+        <Text>
+          {rowParsed.name} - {moment(rowParsed.date).fromNow()}
+          <Icon name="chevron-right" size={12} color="#000" /></Text>
       </TouchableHighlight>
     );
   }
