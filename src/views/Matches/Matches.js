@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View, ListItem, ListView } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
+
+import GiftedListView from 'react-native-gifted-listview';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,10 +40,28 @@ class Matches extends Component {
     //   dataSource: this.state.dataSource.cloneWithRows(this.props.store.matchesList),
     // });
   }
-  renderItem = (item) => {
-    console.log(item);
+
+  onFetch = (page = 1, callback) => {
+    const rows = this.props.store.showsList.map((item) => JSON.stringify(item));
+    callback(rows, { allLoaded: true });
+  }
+
+  onPress = (rowParsed) => {
+    Actions.seasons({
+      seasons: rowParsed.seasons,
+    });
+  }
+
+  renderRowView = (rowData) => {
+    const rowParsed = JSON.parse(rowData);
     return (
-      <ListItem item={item} onPress={() => {}} />
+      <TouchableHighlight
+        style={customStyles.row}
+        underlayColor="#c8c7cc"
+        onPress={() => this.onPress(rowParsed)}
+      >
+        <Text>{rowParsed.show.title}</Text>
+      </TouchableHighlight>
     );
   }
 
@@ -50,11 +70,20 @@ class Matches extends Component {
     return (
       <View style={styles.container}>
         <Text>Matches</Text>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderItem}
-          style={styles.listview}
-        />
+          {this.props.store.showsList.length > 0 ?
+            <GiftedListView
+              rowView={this.renderRowView}
+              onFetch={this.onFetch}
+              enableEmptySections
+              pagination
+              refreshable
+              withSections={false}
+              customStyles={customStyles}
+              refreshableTintColor="blue"
+            />
+            :
+            <Text>Loading...</Text>
+          }
 
       </View>
     );
