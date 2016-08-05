@@ -41,8 +41,10 @@ class Home extends Component {
   goToSingleMatch = () => {
     this.props.store.pushMatch()
     .then((match) => {
-      console.log(match);
-      // Actions.match(match);
+      console.log('Match: ', match.val());
+      Actions.match({
+        match: match.val(),
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -57,6 +59,9 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.heading}>Welcome {this.props.store.user.email}!</Text>
+        <TouchableOpacity onPress={this.goToSingleMatch}>
+          <Text style={styles.matchButton}>Go to single match</Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={this.goToMatches}>
           <Text style={styles.matchButton}>Go to matches</Text>
         </TouchableOpacity>

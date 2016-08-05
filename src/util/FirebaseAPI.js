@@ -11,8 +11,7 @@ firebase.initializeApp(config);
 
 export default FirebaseAPI = {
   pushMatch() {
-    const newMatchKey = firebase.database().ref('matches').push().key;
-    const matchData = {
+    const newMatchKey = firebase.database().ref('matches').push({
       running: true,
       target: {
         paolo: true,
@@ -21,10 +20,11 @@ export default FirebaseAPI = {
         paolo: true,
         daniele: true,
       },
-    };
-    const updates = {};
-    updates[`/matches/${newMatchKey}`] = matchData;
-    return firebase.database().ref().update(updates);
+    }).key;
+
+    return firebase.database()
+      .ref(`/matches/${newMatchKey}`)
+      .once('value');
   },
 
   getMatches() {
