@@ -10,6 +10,11 @@ class MatchesStore {
   @action getUser() {
     this.user = FirebaseAPI.getCurrentUser();
   }
+
+  @action setUser(user) {
+    this.user = user;
+  }
+
   @action pushMatches() {
     this.isLoading = true;
 
