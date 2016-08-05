@@ -20,7 +20,14 @@ class MatchesStore {
   }
 
   @action getMatchesList() {
-    // get matches
+    this.matchesList = FirebaseAPI.getMatches();
+      // .then(res => {
+      //   console.log('getMatchesList', res.val());
+      //   this.matchesList = res.val();
+      // })
+      // .catch((err) => {
+      //   console.log('Error getting matches: ', err);
+      // });
   }
 }
 
