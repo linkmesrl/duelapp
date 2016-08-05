@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View, ListItem, ListView } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
+
+import GiftedListView from 'react-native-gifted-listview';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,39 +25,57 @@ const styles = StyleSheet.create({
 
 @observer
 class Matches extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-    };
-  }
-
   componentDidMount() {
     this.props.store.getMatchesList();
     // this.setState({
     //   dataSource: this.state.dataSource.cloneWithRows(this.props.store.matchesList),
     // });
   }
-  renderItem = (item) => {
-    console.log(item);
+
+  onFetch = (page = 1, callback) => {
+    const rows = this.props.store.matchesList.map((item) => JSON.stringify(item));
+    callback(rows, { allLoaded: true });
+  }
+
+  onPress = (rowParsed) => {
+    Actions.seasons({
+      seasons: rowParsed.seasons,
+    });
+  }
+
+  renderRowView = (rowData) => {
+    const rowParsed = JSON.parse(rowData);
     return (
-      <ListItem item={item} onPress={() => {}} />
+      <TouchableHighlight
+        style={customStyles.row}
+        underlayColor="#c8c7cc"
+        onPress={() => this.onPress(rowParsed)}
+      >
+        <Text>{rowParsed.show.title}</Text>
+      </TouchableHighlight>
     );
   }
 
   render() {
-    console.log('matchesList', this.props.store.matchesList);
+    console.log('matchesList', this.props.store.this.props.store.matchesList);
+    if (this.props.store.matchesList.length === 0) {
+      return (
+        <Text>Loading...</Text>
+      );
+    }
     return (
       <View style={styles.container}>
         <Text>Matches</Text>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderItem}
-          style={styles.listview}
+        <GiftedListView
+          rowView={this.renderRowView}
+          onFetch={this.onFetch}
+          enableEmptySections
+          pagination
+          refreshable
+          withSections={false}
+          customStyles={customStyles}
+          refreshableTintColor="blue"
         />
-
       </View>
     );
   }
