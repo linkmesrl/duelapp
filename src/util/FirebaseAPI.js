@@ -28,8 +28,8 @@ export default FirebaseAPI = {
   },
 
   getMatches() {
-    return firebase.database().ref('/matches').once('value')
-      .then((snapshot) => snapshot.val());
+    return firebase.database().ref('/matches').once('value');
+      // .then((snapshot) => snapshot.val());
   },
 
   login(username, password) {
