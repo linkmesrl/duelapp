@@ -15,18 +15,8 @@ class MatchesStore {
     this.user = user;
   }
 
-  @action pushMatches() {
-    this.isLoading = true;
-
-    FirebaseAPI.pushMatches()
-      .then(() => {
-        this.isLoading = false;
-        this.matchesPushed = true;
-      })
-      .catch((err) => {
-        console.log('Error pushing matches: ', err);
-        this.isLoading = false;
-      });
+  @action pushMatch() {
+    return Promise.resolve(FirebaseAPI.pushMatch());
   }
 
   @action getMatchesList() {
