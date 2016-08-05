@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { Actions } from 'react-native-router-flux';
+
+const STORAGE_KEY = '@AsyncStorageLogged:key';
 
 const styles = StyleSheet.create({
   container: {
@@ -38,13 +40,18 @@ class Login extends Component {
     super(props);
     this.state = { username: 'gianfranco@linkme.it', password: 'gianfranco123' };
   }
-  // componentDidUpdate(nextProps) {
-  //   if (nextProps.store.logged) {
-  //     Actions.home({
-  //       type: 'replace',
-  //     });
-  //   }
-  // }
+
+  async saveCurrentUser(user) {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, user);
+      Actions.home({
+        type: 'replace',
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   handleUsername = (username) => this.setState({ username });
   handlePassword = (password) => this.setState({ password });
 
@@ -53,10 +60,7 @@ class Login extends Component {
     this.props.store.login(username, password)
     .then((user) => {
       console.log(user);
-      this.props.store.logged = true;
-      Actions.home({
-        type: 'replace',
-      });
+      this.saveCurrentUser(JSON.stringify(user));
     })
     .catch((err) => {
       console.log(err);

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage , StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { observer } from 'mobx-react/native';
 
@@ -31,7 +31,11 @@ const styles = StyleSheet.create({
 @observer
 class Home extends Component {
   componentDidMount() {
-    this.props.store.getUser();
+    if(this.props.user) {
+      this.props.store.setUser(JSON.parse(this.props.user));
+    } else {
+      this.props.store.getUser();
+    }
   }
 
   goToSingleMatch() {
