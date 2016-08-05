@@ -33,7 +33,7 @@ class Matches extends Component {
   }
 
   onFetch = (page = 1, callback) => {
-    const rows = this.props.store.matchesList.map((item) => JSON.stringify(item));
+    const rows = Object.keys(this.props.store.matchesList).map((item) => JSON.stringify(item));
     callback(rows, { allLoaded: true });
   }
 
@@ -47,17 +47,17 @@ class Matches extends Component {
     const rowParsed = JSON.parse(rowData);
     return (
       <TouchableHighlight
-        style={customStyles.row}
+        // style={customStyles.row}
         underlayColor="#c8c7cc"
         onPress={() => this.onPress(rowParsed)}
       >
-        <Text>{rowParsed.show.title}</Text>
+        <Text>{rowParsed}</Text>
       </TouchableHighlight>
     );
   }
 
   render() {
-    console.log('matchesList', this.props.store.this.props.store.matchesList);
+    console.log('matchesList', console.log(Object.keys(this.props.store.matchesList)));
     if (this.props.store.matchesList.length === 0) {
       return (
         <Text>Loading...</Text>
@@ -73,7 +73,7 @@ class Matches extends Component {
           pagination
           refreshable
           withSections={false}
-          customStyles={customStyles}
+          // customStyles={customStyles}
           refreshableTintColor="blue"
         />
       </View>
