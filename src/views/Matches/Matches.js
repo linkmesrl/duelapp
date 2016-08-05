@@ -25,15 +25,6 @@ const styles = StyleSheet.create({
 
 @observer
 class Matches extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
-      }),
-    };
-  }
-
   componentDidMount() {
     this.props.store.getMatchesList();
     // this.setState({
@@ -42,7 +33,7 @@ class Matches extends Component {
   }
 
   onFetch = (page = 1, callback) => {
-    const rows = this.props.store.showsList.map((item) => JSON.stringify(item));
+    const rows = this.props.store.matchesList.map((item) => JSON.stringify(item));
     callback(rows, { allLoaded: true });
   }
 
@@ -66,25 +57,25 @@ class Matches extends Component {
   }
 
   render() {
-    console.log('matchesList', this.props.store.matchesList);
+    console.log('matchesList', this.props.store.this.props.store.matchesList);
+    if (this.props.store.matchesList.length === 0) {
+      return (
+        <Text>Loading...</Text>
+      );
+    }
     return (
       <View style={styles.container}>
         <Text>Matches</Text>
-          {this.props.store.showsList.length > 0 ?
-            <GiftedListView
-              rowView={this.renderRowView}
-              onFetch={this.onFetch}
-              enableEmptySections
-              pagination
-              refreshable
-              withSections={false}
-              customStyles={customStyles}
-              refreshableTintColor="blue"
-            />
-            :
-            <Text>Loading...</Text>
-          }
-
+        <GiftedListView
+          rowView={this.renderRowView}
+          onFetch={this.onFetch}
+          enableEmptySections
+          pagination
+          refreshable
+          withSections={false}
+          customStyles={customStyles}
+          refreshableTintColor="blue"
+        />
       </View>
     );
   }
