@@ -4,6 +4,8 @@ import { observer } from 'mobx-react/native';
 import { Actions } from 'react-native-router-flux';
 
 import GiftedListView from 'react-native-gifted-listview';
+import moment from 'moment';
+
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +70,7 @@ class Matches extends Component {
         underlayColor="#c8c7cc"
         onPress={() => this.onPress(rowParsed)}
       >
-        <Text>{rowParsed.id}</Text>
+        <Text>{rowParsed.name} - {moment(rowParsed.date).fromNow()}</Text>
       </TouchableHighlight>
     );
   }
