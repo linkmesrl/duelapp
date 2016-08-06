@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-mobx';
 import { observer } from 'mobx-react/native';
 import Swiper from 'react-native-swiper';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
   },
-  slide1: {
+  slide: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -69,15 +69,14 @@ class Match extends Component {
           showsPagination={false}
           onMomentumScrollEnd={this.onChange}
         >
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
+          {
+            this.props.match.members.map((name, i) => (
+              <View style={styles.slide} key={i}>
+                <Text style={styles.text}>{name}</Text>
+              </View>
+            ))
+          }
+
         </Swiper>
         <TouchableOpacity style={styles.exitButton} onPress={this.goHome}>
           <Icon name="remove" size={30} color="#fff" />
@@ -89,6 +88,7 @@ class Match extends Component {
 
 Match.propTypes = {
   store: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 export default Match;

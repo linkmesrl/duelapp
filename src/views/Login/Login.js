@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { AsyncStorage, StyleSheet, Text, View, TextInput, TouchableHighlight } from 'react-native';
 import { observer } from 'mobx-react/native';
-import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-mobx';
 
 const STORAGE_KEY = '@AsyncStorageLogged:key';
 

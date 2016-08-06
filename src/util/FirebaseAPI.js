@@ -10,17 +10,21 @@ const config = {
 firebase.initializeApp(config);
 
 export default FirebaseAPI = {
-  pushMatch() {
-    const newMatchKey = firebase.database().ref('matches').push({
+  pushMatch(name = 'New game', members = ['paolo', 'daniele']) {
+    // const newPostKey = firebase.database().ref().child('matches').push().key;
+    const newMatchKey = firebase.database().ref('matches').push().key;
+    const match = {
+      id: newMatchKey,
+      date: new Date,
       running: true,
-      target: {
-        paolo: true,
-      },
-      members: {
-        paolo: true,
-        daniele: true,
-      },
-    }).key;
+      target: members[0],
+      members,
+      name,
+    };
+    const updates = {};
+    updates[`/matches/${newMatchKey}`] = match;
+
+    firebase.database().ref().update(updates);
 
     return firebase.database()
       .ref(`/matches/${newMatchKey}`)

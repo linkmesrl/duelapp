@@ -3,7 +3,9 @@ import { Dimensions, StyleSheet, Text, View, TouchableHighlight } from 'react-na
 import { observer } from 'mobx-react/native';
 import { Actions } from 'react-native-mobx';
 
+import Icon from 'react-native-vector-icons/FontAwesome';
 import GiftedListView from 'react-native-gifted-listview';
+import moment from 'moment';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -27,6 +29,14 @@ const customStyles = {
     alignItems: 'center',
     backgroundColor: '#FFF',
   },
+  title: {
+    paddingTop: 70,
+  },
+  text: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
   row: {
     width,
     padding: 10,
@@ -41,10 +51,11 @@ class Matches extends Component {
   }
 
   onFetch = (page = 1, callback) => {
-    const rows = Object.keys(this.props.store.matchesList).map(
-      (item) => JSON.stringify(item)
-    );
-    callback(rows);
+    const rows = Object.keys(this.props.store.matchesList)
+      .map(key => this.props.store.matchesList[key])
+      .filter(match => match.running)
+      .map(filteredMatch => JSON.stringify(filteredMatch));
+    callback(rows, { allLoaded: true });
   }
 
   onPress = (rowParsed) => {
@@ -61,7 +72,9 @@ class Matches extends Component {
         underlayColor="#c8c7cc"
         onPress={() => this.onPress(rowParsed)}
       >
-        <Text>{rowParsed}</Text>
+        <Text>
+          {rowParsed.name} - {moment(rowParsed.date).fromNow()}
+          <Icon name="chevron-right" size={12} color="#000" /></Text>
       </TouchableHighlight>
     );
   }

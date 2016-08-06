@@ -11,11 +11,15 @@ react-native run-ios
 ```
 
 ## TODO
-[] Keep logged state  
-[] Retrieve users data list from Firebase or find a way to have a user list  
-
-
-
+- [ ] Retrieve users data list from Firebase or find a way to have a user list @ilgianfra
+- [ ] Style buttons @paolorovella
+- [ ] Style titles @paolorovella
+- [ ] Style pages @paolorovella
+- [ ] Add a filter to refresh the list of matches according between running and completed
+- [x] Show matches filtered by running property
+- [x] Retrieve matches from Firebase
+- [x] Retrieve single match info
+- [x] Keep logged state
 
 ## The Concept
 We want to create a quick multiplayer game, with minimal interactions and with a ridiculous level of time consumption.
@@ -33,4 +37,3 @@ And we want it to be Open Source and highly customizable: we want the designers 
 ## How to play
 If you are in a match, whenever you want you can log in the app and make your move.  
 Theoretically every move can increase your not-losing chances, but really, It doesn’t count how many move you do: just the last move in the match counts. So, try to be as punctual as you can.
-
