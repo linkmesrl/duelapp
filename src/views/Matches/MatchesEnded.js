@@ -53,7 +53,7 @@ class Matches extends Component {
   onFetch = (page = 1, callback) => {
     const rows = Object.keys(this.props.store.matchesList)
       .map(key => this.props.store.matchesList[key])
-      .filter(match => match.date < match.dateEndMatch)
+      .filter(match => match.date >= match.dateEndMatch)
       .map(filteredMatch => JSON.stringify(filteredMatch));
     callback(rows, { allLoaded: true });
   }
@@ -82,8 +82,6 @@ class Matches extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Running Matches</Text>
-        <Text>Matches Ended</Text>
         {this.props.store.matchesList.length !== 0 ?
           <GiftedListView
             rowView={this.renderRowView}
