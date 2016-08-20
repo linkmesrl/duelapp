@@ -45,7 +45,7 @@ const customStyles = {
 };
 
 @observer
-class Matches extends Component {
+class MatchesEnded extends Component {
   componentDidMount() {
     this.props.store.getMatchesList();
   }
@@ -101,8 +101,8 @@ class Matches extends Component {
   }
 }
 
-Matches.propTypes = {
+MatchesEnded.propTypes = {
   store: PropTypes.object.isRequired,
 };
 
-export default Matches;
+export default MatchesEnded;

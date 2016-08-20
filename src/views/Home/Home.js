@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-mobx';
 import { observer } from 'mobx-react/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import * as Animatable from 'react-native-animatable';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,22 +65,39 @@ class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Welcome {this.props.store.user.email}!</Text>
-        <TouchableOpacity onPress={this.goToSingleMatch}>
-          <Text style={styles.matchButton}>
-            <Icon name="plus" size={20} color="#000" /> Create a new match</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.goToMatches}>
-          <Text style={styles.matchButton}>
-            Go to matches <Icon name="chevron-right" size={20} color="#000" />
-          </Text>
-        </TouchableOpacity>
+        <Animatable.Text
+          animation="fadeInUp"
+          duration={500}
+          style={styles.heading}
+        >
+            Welcome {this.props.store.user.email}!
+        </Animatable.Text>
+        <Animatable.View
+          animation="fadeInUp"
+          duration={600}
+        >
+          <TouchableOpacity onPress={this.goToSingleMatch}>
+            <Text style={styles.matchButton}>
+              <Icon name="plus" size={20} color="#000" /> Create a new match
+            </Text>
+          </TouchableOpacity>
+        </Animatable.View>
+        <Animatable.View
+          animation="fadeInUp"
+          duration={700}
+        >
+          <TouchableOpacity onPress={this.goToMatches}>
+            <Text style={styles.matchButton}>
+              Go to matches <Icon name="chevron-right" size={20} color="#000" />
+            </Text>
+          </TouchableOpacity>
+        </Animatable.View>
         {
           // this.props.matchesList.map((el, i) => <Text style={styles.heading}>{el}</Text>)
         }
         {this.props.store.matchesPushed &&
           <TouchableOpacity onPress={this.goToMatches}>
-            <Text>Go to matches</Text>
+            <Text animation="fadeInUp">Go to matches</Text>
           </TouchableOpacity>
         }
       </View>

@@ -12,6 +12,7 @@
     "moment": "^2.14.1",
     "react": "15.2.0",
     "react-native": "0.29.0",
+    "react-native-animatable": "^0.6.1",
     "react-native-gifted-listview": "0.0.15",
     "react-native-mobx": "^0.1.1",
     "react-native-router-flux": "3.30.9",
