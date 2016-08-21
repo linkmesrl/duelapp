@@ -35,18 +35,20 @@ const styles = StyleSheet.create({
   },
 });
 
-@observer
+@observer(['matchesStore'])
 class Home extends Component {
   componentDidMount() {
+    const { matchesStore } = this.props;
     if (this.props.user) {
-      this.props.store.setUser(JSON.parse(this.props.user));
+      matchesStore.setUser(JSON.parse(this.props.user));
     } else {
-      this.props.store.getUser();
+      matchesStore.getUser();
     }
   }
 
   goToSingleMatch = () => {
-    this.props.store.pushMatch()
+    const { matchesStore } = this.props;
+    matchesStore.pushMatch()
     .then((match) => {
       console.log('Match: ', match.val());
       Actions.match({
@@ -63,6 +65,7 @@ class Home extends Component {
   }
 
   render() {
+    const { matchesStore } = this.props;
     return (
       <View style={styles.container}>
         <Animatable.Text
@@ -70,7 +73,7 @@ class Home extends Component {
           duration={500}
           style={styles.heading}
         >
-            Welcome {this.props.store.user.email}!
+            Welcome {matchesStore.user.email}!
         </Animatable.Text>
         <Animatable.View
           animation="fadeInUp"
@@ -95,7 +98,7 @@ class Home extends Component {
         {
           // this.props.matchesList.map((el, i) => <Text style={styles.heading}>{el}</Text>)
         }
-        {this.props.store.matchesPushed &&
+        {matchesStore.matchesPushed &&
           <TouchableOpacity onPress={this.goToMatches}>
             <Text animation="fadeInUp">Go to matches</Text>
           </TouchableOpacity>
@@ -106,7 +109,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  store: PropTypes.object.isRequired,
+  matchesStore: PropTypes.object.isRequired,
   user: PropTypes.string,
 };
 

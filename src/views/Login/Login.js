@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 });
 
 
-@observer
+@observer(['loginStore'])
 class Login extends Component {
 
   constructor(props) {
@@ -56,8 +56,9 @@ class Login extends Component {
   handlePassword = (password) => this.setState({ password });
 
   login = () => {
+    const { loginStore } = this.props;
     const { username, password } = this.state;
-    this.props.store.login(username, password)
+    loginStore.login(username, password)
     .then((user) => {
       console.log(user);
       this.saveCurrentUser(JSON.stringify(user));
@@ -68,7 +69,8 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.props.store.logged);
+    const { loginStore } = this.props;
+    console.log(loginStore.logged);
     return (
       <View style={styles.container}>
         <Text>Login</Text>
@@ -95,6 +97,6 @@ class Login extends Component {
   }
 }
 Login.propTypes = {
-  store: PropTypes.object.isRequired,
+  loginStore: PropTypes.object.isRequired,
 };
 export default Login;

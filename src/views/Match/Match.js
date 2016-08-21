@@ -46,11 +46,12 @@ const styles = StyleSheet.create({
   },
 });
 
-@observer
+@observer(['matchStore'])
 class Match extends Component {
   onChange = (e, state) => {
-    if (state.index !== this.props.store.currentIndex) {
-      this.props.store.setCurrentIndex(state.index);
+    const { matchStore } = this.props;
+    if (state.index !== matchStore.currentIndex) {
+      matchStore.setCurrentIndex(state.index);
     }
   }
 
@@ -87,7 +88,7 @@ class Match extends Component {
 }
 
 Match.propTypes = {
-  store: PropTypes.object.isRequired,
+  matchStore: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
 };
 

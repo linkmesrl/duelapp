@@ -44,15 +44,17 @@ const customStyles = {
   },
 };
 
-@observer
+@observer(['matchesStore'])
 class Matches extends Component {
   componentDidMount() {
-    this.props.store.getMatchesList();
+    const { matchesStore } = this.props;
+    matchesStore.getMatchesList();
   }
 
   onFetch = (page = 1, callback) => {
-    const rows = Object.keys(this.props.store.matchesList)
-      .map(key => this.props.store.matchesList[key])
+    const { matchesStore } = this.props;
+    const rows = Object.keys(matchesStore.matchesList)
+      .map(key => matchesStore.matchesList[key])
       .filter(match => match.date < match.dateEndMatch)
       .map(filteredMatch => JSON.stringify(filteredMatch));
     callback(rows, { allLoaded: true });
@@ -80,11 +82,12 @@ class Matches extends Component {
   }
 
   render() {
+    const { matchesStore } = this.props;
     return (
       <View style={styles.container}>
         <Text>Running Matches</Text>
         <Text>Matches Ended</Text>
-        {this.props.store.matchesList.length !== 0 ?
+        {matchesStore.matchesList.length !== 0 ?
           <GiftedListView
             rowView={this.renderRowView}
             onFetch={this.onFetch}
@@ -104,7 +107,7 @@ class Matches extends Component {
 }
 
 Matches.propTypes = {
-  store: PropTypes.object.isRequired,
+  matchesStore: PropTypes.object.isRequired,
 };
 
 export default Matches;
