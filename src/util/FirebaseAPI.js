@@ -60,7 +60,6 @@ export default FirebaseAPI = {
 
   getCurrentUser() {
     const user = firebase.auth().currentUser;
-    console.log(user);
     return user;
   },
 

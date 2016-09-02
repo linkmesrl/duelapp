@@ -13,7 +13,6 @@ class LoginStore {
   }
 
   @action saveCurrentUserToStorage(user) {
-    console.log(user);
     return Promise.resolve(FirebaseAPI.saveCurrentUserToStorage(user));
   }
 
