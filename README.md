@@ -11,15 +11,15 @@ react-native run-ios
 ```
 
 ## TODO
-- [ ] Retrieve users data list from Firebase or find a way to have a user list @ilgianfra
+- [x] Retrieve users data list from Firebase or find a way to have a user list @ilgianfra
 - [ ] Style buttons @paolorovella
 - [ ] Style titles @paolorovella
 - [ ] Style pages @paolorovella
 - [ ] Add a filter to refresh the list of matches according between running and completed
 - [ ] Graphic / UX - Remove initial page, active game and ended game are in the home page @buseca
 - [ ] Graphic / UX - Pages Wireframe @buseca
-- [ ] Log out functionality @ilgianfra
-- [ ] Link user on db to firebase user @ilgianfra
+- [x] Log out functionality @ilgianfra
+- [x] Link user on db to firebase user @ilgianfra
 - [ ] User list with live filter to add on create match page @ilgianfra
 - [x] Show matches filtered by running property
 - [x] Retrieve matches from Firebase
