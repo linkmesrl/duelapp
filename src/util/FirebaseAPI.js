@@ -51,6 +51,13 @@ export default FirebaseAPI = {
     return firebase.auth().signOut();
   },
 
+  saveCurrentUserToStorage(user) {
+    firebase.database().ref('users/' + user.uid).set({
+      username: user.displayName || 'nickname',
+      email: user.email,
+    });
+  },
+
   getCurrentUser() {
     const user = firebase.auth().currentUser;
     console.log(user);

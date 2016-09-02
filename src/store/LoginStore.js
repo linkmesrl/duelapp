@@ -12,6 +12,11 @@ class LoginStore {
     return Promise.resolve(FirebaseAPI.logout());
   }
 
+  @action saveCurrentUserToStorage(user) {
+    console.log(user);
+    return Promise.resolve(FirebaseAPI.saveCurrentUserToStorage(user));
+  }
+
 }
 
 export default new LoginStore();

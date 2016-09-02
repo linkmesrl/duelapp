@@ -62,6 +62,7 @@ class Login extends Component {
     .then((user) => {
       console.log(user);
       this.saveCurrentUser(JSON.stringify(user));
+      return loginStore.saveCurrentUserToStorage(user);
     })
     .catch((err) => {
       console.log(err);
