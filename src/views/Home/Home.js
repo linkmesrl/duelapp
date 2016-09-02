@@ -72,6 +72,10 @@ class Home extends Component {
     });
   }
 
+  createMatch = () => {
+    Actions.createMatch();
+  }
+
   goToMatches() {
     Actions.matches();
   }
@@ -107,7 +111,7 @@ class Home extends Component {
           animation="fadeInUp"
           duration={600}
         >
-          <TouchableOpacity onPress={this.goToSingleMatch}>
+          <TouchableOpacity onPress={this.createMatch}>
             <Text style={styles.matchButton}>
               <Icon name="plus" size={20} color="#000" /> Create a new match
             </Text>

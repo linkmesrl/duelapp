@@ -63,11 +63,8 @@ export default FirebaseAPI = {
     return user;
   },
 
-  getUsers() {
-    return firebase.database().ref('/users/P2IJNrzKztdhx3ScnQkV6OZQSUr2').once('value')
-      .then((snapshot) => {
-        console.log(snapshot.val());
-      });
+  getUsersList() {
+    return firebase.database().ref('/users').once('value');
   },
 
   saveUserData() {

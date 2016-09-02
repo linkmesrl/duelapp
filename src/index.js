@@ -7,6 +7,7 @@ import Login from './views/Login/Login';
 import Match from './views/Match/Match';
 import Matches from './views/Matches/Matches';
 import Profile from './views/Profile/Profile';
+import CreateMatch from './views/Match/CreateMatch';
 
 import matchStore from './store/MatchStore';
 import matchesStore from './store/MatchesStore';
@@ -48,6 +49,11 @@ export default () => (
       key="profile"
       component={Profile}
       title="Profile"
+    />
+    <Scene
+      key="createMatch"
+      component={CreateMatch}
+      title="Create Match"
     />
   </Router>
 );
