@@ -64,6 +64,10 @@ class Home extends Component {
     Actions.matches();
   }
 
+  goToProfile() {
+    Actions.profile();
+  }
+
   render() {
     const { matchesStore } = this.props;
     return (
@@ -92,6 +96,12 @@ class Home extends Component {
           <TouchableOpacity onPress={this.goToMatches}>
             <Text style={styles.matchButton}>
               Go to matches <Icon name="chevron-right" size={20} color="#000" />
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.goToProfile}>
+            <Text style={styles.matchButton}>
+              Go to profile <Icon name="chevron-right" size={20} color="#000" />
             </Text>
           </TouchableOpacity>
         </Animatable.View>

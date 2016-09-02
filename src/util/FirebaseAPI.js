@@ -60,4 +60,9 @@ export default FirebaseAPI = {
       });
   },
 
+  saveUserData() {
+    // TODO it has to be implemented
+    return {};
+  },
+
 };

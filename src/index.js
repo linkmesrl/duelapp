@@ -6,12 +6,14 @@ import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 import Match from './views/Match/Match';
 import Matches from './views/Matches/Matches';
+import Profile from './views/Profile/Profile';
 
 import matchStore from './store/MatchStore';
 import matchesStore from './store/MatchesStore';
 import loginStore from './store/LoginStore';
+import profileStore from './store/ProfileStore';
 
-const stores = { matchStore, matchesStore, loginStore };
+const stores = { matchStore, matchesStore, loginStore, profileStore };
 
 export default () => (
   <Router {...stores}>
@@ -41,6 +43,11 @@ export default () => (
       key="matches"
       component={Matches}
       title="Matches"
+    />
+    <Scene
+      key="profile"
+      component={Profile}
+      title="Profile"
     />
   </Router>
 );
