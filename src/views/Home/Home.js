@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
 });
 
-@observer(['matchesStore'])
+@observer(['matchesStore', 'loginStore'])
 class Home extends Component {
   componentDidMount() {
     const { matchesStore } = this.props;
@@ -81,8 +81,8 @@ class Home extends Component {
   }
 
   logout = () => {
-    const { matchesStore } = this.props;
-    matchesStore.logout()
+    const { loginStore } = this.props;
+    loginStore.logout()
     .then(() => {
       console.log('mi sloggo');
       this.logoutCurrentUser();
