@@ -7,6 +7,10 @@ class MatchesStore {
   @observable matchesList = [];
   @observable user = {};
 
+  @action logout() {
+    return Promise.resolve(FirebaseAPI.logout());
+  }
+
   @action getUser() {
     this.user = FirebaseAPI.getCurrentUser();
   }

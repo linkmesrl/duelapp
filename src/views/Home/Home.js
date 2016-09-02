@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { AsyncStorage, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Actions } from 'react-native-mobx';
 import { observer } from 'mobx-react/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
 
+const STORAGE_KEY = '@AsyncStorageLogged:key';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,6 +47,17 @@ class Home extends Component {
     }
   }
 
+  async logoutCurrentUser(user) {
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY, user);
+      Actions.login({
+        type: 'replace',
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   goToSingleMatch = () => {
     const { matchesStore } = this.props;
     matchesStore.pushMatch()
@@ -66,6 +78,18 @@ class Home extends Component {
 
   goToProfile() {
     Actions.profile();
+  }
+
+  logout = () => {
+    const { matchesStore } = this.props;
+    matchesStore.logout()
+    .then(() => {
+      console.log('mi sloggo');
+      this.logoutCurrentUser();
+    })
+    .catch((err) => {
+      console.log('Error getting logged out: ', err);
+    });
   }
 
   render() {
@@ -104,6 +128,12 @@ class Home extends Component {
               Go to profile <Icon name="chevron-right" size={20} color="#000" />
             </Text>
           </TouchableOpacity>
+
+          <TouchableOpacity onPress={this.logout}>
+            <Text style={styles.matchButton}>
+              Logout <Icon name="chevron-right" size={20} color="#000" />
+            </Text>
+          </TouchableOpacity>
         </Animatable.View>
         {
           // this.props.matchesList.map((el, i) => <Text style={styles.heading}>{el}</Text>)
@@ -121,6 +151,7 @@ class Home extends Component {
 Home.propTypes = {
   matchesStore: PropTypes.object.isRequired,
   user: PropTypes.string,
+  loginStore: PropTypes.object.isRequired,
 };
 
 export default Home;

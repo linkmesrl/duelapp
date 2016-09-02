@@ -47,6 +47,10 @@ export default FirebaseAPI = {
     return firebase.auth().signInWithEmailAndPassword(username, password);
   },
 
+  logout() {
+    return firebase.auth().signOut();
+  },
+
   getCurrentUser() {
     const user = firebase.auth().currentUser;
     console.log(user);

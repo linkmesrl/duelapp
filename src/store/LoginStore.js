@@ -7,6 +7,11 @@ class LoginStore {
   @action login(user, password) {
     return Promise.resolve(FirebaseAPI.login(user, password));
   }
+
+  @action logout() {
+    return Promise.resolve(FirebaseAPI.logout());
+  }
+
 }
 
 export default new LoginStore();
