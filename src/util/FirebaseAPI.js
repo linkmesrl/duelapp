@@ -19,10 +19,10 @@ export default FirebaseAPI = {
     const endMatch = moment(now).add(getRandomNumber(), 'minutes').format();
 
     const newMatchKey = firebase.database().ref('matches').push().key;
+    // TODO add target attribute
     const match = {
       id: newMatchKey,
       running: true,
-      target: members[0],
       date: now,
       dateEndMatch: endMatch,
       members,
@@ -52,9 +52,10 @@ export default FirebaseAPI = {
   },
 
   saveCurrentUserToStorage(user) {
-    firebase.database().ref('users/' + user.uid).set({
+    firebase.database().ref(`users/${user.uid}`).set({
       username: user.displayName || 'nickname',
       email: user.email,
+      userId: user.uid,
     });
   },
 

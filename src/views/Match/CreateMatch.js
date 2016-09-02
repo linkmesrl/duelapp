@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { Dimensions, StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import { Dimensions, StyleSheet, View, Text, TouchableHighlight, TextInput } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GiftedListView from 'react-native-gifted-listview';
-
+import { Actions } from 'react-native-mobx';
 
 const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
@@ -12,6 +12,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#000',
+    flex: 1,
+    padding: 5,
+  },
+  buttonWrapper: {
+    flexDirection: 'row',
   },
 });
 
@@ -44,6 +57,11 @@ const customStyles = {
 @observer(['matchStore'])
 class CreateMatch extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { matchName: 'new Match' };
+  }
+
   componentDidMount() {
     const { matchStore } = this.props;
     matchStore.getUsersList();
@@ -59,6 +77,7 @@ class CreateMatch extends Component {
 
   onPress = (rowParsed) => {
     console.log('press', rowParsed);
+    // this.createMatch();
   }
 
   renderRowView = (rowData) => {
@@ -76,11 +95,37 @@ class CreateMatch extends Component {
     );
   }
 
+  createMatch = () => {
+    const { matchStore } = this.props;
+    matchStore.pushMatch(this.state.matchName)
+    .then((match) => {
+      console.log(match);
+      Actions.matches();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  handleMatchName = (matchName) => this.setState({ matchName });
 
   render() {
     const { matchStore } = this.props;
     return (
       <View style={styles.container}>
+        <TextInput
+          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          onChangeText={this.handleMatchName}
+          value={this.state.matchName}
+        />
+        <View style={styles.buttonWrapper}>
+          <TouchableHighlight
+            onPress={this.createMatch}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Create Match with all users</Text>
+          </TouchableHighlight>
+        </View>
         {matchStore.usersList.length !== 0 ?
           <GiftedListView
             rowView={this.renderRowView}
@@ -95,6 +140,7 @@ class CreateMatch extends Component {
         :
           <Text>Loading...</Text>
         }
+
       </View>
     );
   }

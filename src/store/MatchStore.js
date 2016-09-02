@@ -16,6 +16,10 @@ class MatchStore {
       this.usersList = users.val();
     });
   }
+
+  @action pushMatch(matchName) {
+    return Promise.resolve(FirebaseAPI.pushMatch(matchName, this.usersList));
+  }
 }
 
 export default new MatchStore();
